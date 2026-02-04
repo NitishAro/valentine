@@ -4,12 +4,13 @@ import streamlit.components.v1 as components
 st.set_page_config(page_title="Valentine Surprise", layout="wide")
 
 # ---------- GLOBAL STYLING ----------
+# We set the default background to the lighter red for the first two pages
 st.markdown("""
 <style>
 html, body, [data-testid="stAppViewContainer"] {
     margin: 0;
     padding: 0;
-    background-color: #b30000;
+    background-color: #b30000; 
 }
 
 .stApp {
@@ -138,12 +139,11 @@ elif st.session_state.page == 2:
 # ================= PAGE 3 =================
 elif st.session_state.page == 3:
 
-    # We generate a massive string of text to fill the background
-    background_text = "I LOVE YOU " * 800
+    background_text = "I LOVE YOU " * 1000
 
     st.markdown(f"""
     <style>
-    /* Hide the Streamlit header and padding to make it truly full-screen */
+    /* Force the deep maroon background for this page specifically */
     header, [data-testid="stHeader"] {{
         display: none;
     }}
@@ -154,9 +154,9 @@ elif st.session_state.page == 3:
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: #b30000;
+        background-color: #4d0000; /* Deep Maroon */
         overflow: hidden;
-        z-index: 9999; /* Put it on top of everything */
+        z-index: 9999;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -168,31 +168,37 @@ elif st.session_state.page == 3:
         left: 0;
         width: 100%;
         height: 100%;
-        font-size: 24px;
+        font-size: 16px;
         font-weight: bold;
-        color: rgba(255, 255, 255, 0.1); /* Faint white background text */
-        line-height: 1.4;
-        text-align: justify;
-        padding: 10px;
+        color: rgba(255, 255, 255, 0.22); /* Visible pattern */
+        line-height: 1.8;
+        text-align: center;
+        padding: 5px;
         pointer-events: none;
         word-wrap: break-word;
     }}
 
     .love-main {{
         position: relative;
-        font-size: 100px;
+        font-size: 85px;
         font-weight: 900;
         color: white;
         text-align: center;
         z-index: 10001;
-        text-shadow: 0px 0px 20px rgba(0,0,0,0.5);
-        animation: pulse 1.5s infinite;
+        text-shadow: 0px 0px 30px rgba(0,0,0,0.8);
+        animation: heartBeat 1.2s infinite ease-in-out;
     }}
 
-    @keyframes pulse {{
-        0% {{ transform: scale(1); }}
-        50% {{ transform: scale(1.05); }}
-        100% {{ transform: scale(1); }}
+    @keyframes heartBeat {{
+        0% {{ transform: scale(1); opacity: 1; }}
+        50% {{ transform: scale(1.1); opacity: 0.8; }}
+        100% {{ transform: scale(1); opacity: 1; }}
+    }}
+
+    @media (max-width: 600px) {{
+        .love-main {{
+            font-size: 55px;
+        }}
     }}
     </style>
 
